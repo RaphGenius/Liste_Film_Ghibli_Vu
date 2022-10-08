@@ -1,0 +1,123 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background: linear-gradient(to top, #93eeff, #fff);
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px auto;
+  font-size: 20px;
+}
+h1 span {
+  display: block;
+  font-size: 60px;
+  color: #913a00;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.container-movies {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 50px;
+  display: flex;
+  gap: 95px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.movie {
+  position: relative;
+  width: 33%;
+  max-width: 200px;
+  max-height: 400px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 5px 0 15px rgba(0, 0, 0, 0.2),
+    -5px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 200ms ease;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.movie:hover {
+  transform: scale(1.1);
+}
+.container-title {
+  height: 50px;
+  padding: 0px 2px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie h3 {
+  text-align: center;
+  font-family: "Satisfy", cursive;
+  letter-spacing: 3px;
+  font-size: 1rem;
+}
+.alreadySeen-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  width: 100%;
+  bottom: 0;
+  height: 20%;
+  background: linear-gradient(to top, #93eeff, #fff);
+  opacity: 0.8;
+  transition: 300ms ease all;
+  transform: translateY(100px);
+}
+.alreadySeen-btn {
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-family: "Satisfy", sans-serif;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.alreadySeen-container:hover {
+  opacity: 1;
+}
+.movie:hover .alreadySeen-container {
+  transform: translateY(0px);
+}
+
+.imgMovie {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 0px 0px 20px 20px;
+}
+@media (max-width: 1000px) {
+  .container-movies {
+    justify-content: center;
+  }
+  .movie {
+    max-width: none;
+    width: 40%;
+    margin-bottom: 100px;
+  }
+}
+
+.arrowUp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 50px;
+  cursor: pointer;
+  transition: 200ms ease all;
+}
+.arrowUp:hover {
+  transform: scale(1.2);
+}
