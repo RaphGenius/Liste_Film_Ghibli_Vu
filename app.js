@@ -1,9 +1,12 @@
+const howManySeen = document.querySelector(".howManySeen");
+
 callApi();
 async function callApi() {
   const response = await fetch(`https://ghibliapi.herokuapp.com/films`);
   const data = await response.json();
   console.log(data);
   createCard(data);
+  numberMoviesSeen();
 
   const seenBtn = document.querySelectorAll(".alreadySeen-btn");
   seenBtn.forEach((btn) => {
@@ -11,6 +14,7 @@ async function callApi() {
       const btnParent = btn.closest(".movie");
       const idMovie = btnParent.getAttribute("data-id");
       saveToLocalStorage(idMovie);
+      numberMoviesSeen();
       btnParent.classList.toggle("seen");
       btnParent.classList.contains("seen")
         ? (btn.textContent = "Déjà vue")
@@ -83,5 +87,14 @@ function saveToLocalStorage(id) {
   } else {
     IdArrays.push(id);
     localStorage.setItem("movie", JSON.stringify(IdArrays));
+  }
+}
+
+function numberMoviesSeen() {
+  let howManyInLs = JSON.parse(localStorage.getItem("movie"));
+  if (!howManyInLs) {
+    howManySeen.textContent = `Film(s) vu(s) : 0`;
+  } else {
+    howManySeen.textContent = `Film(s) vu(s) : ${howManyInLs.length}`;
   }
 }

@@ -14,16 +14,21 @@ html {
 h1 {
   text-align: center;
   margin: 20px auto;
-  font-size: 20px;
+  font-size: 40px;
 }
 h1 span {
   display: block;
-  font-size: 60px;
+  font-size: 80px;
   color: #913a00;
   letter-spacing: 5px;
   font-weight: bold;
 }
-
+.howManySeen {
+  text-align: center;
+  font-family: "Roboto";
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
 .container-movies {
   max-width: 900px;
   margin: 0 auto;
@@ -77,7 +82,7 @@ h1 span {
   height: 20%;
   background: linear-gradient(to top, #93eeff, #fff);
   opacity: 0.8;
-  transition: 300ms ease all;
+  transition: 200ms ease all;
   transform: translateY(100px);
 }
 .alreadySeen-btn {
