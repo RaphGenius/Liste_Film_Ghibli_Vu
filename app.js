@@ -1,24 +1,47 @@
-const movieList = document.querySelector(".container-movies");
-const scrollToTop = document.querySelector(".arrowUp");
+callApi();
 async function callApi() {
   const response = await fetch(`https://ghibliapi.herokuapp.com/films`);
   const data = await response.json();
   console.log(data);
   createCard(data);
+
+  const seenBtn = document.querySelectorAll(".alreadySeen-btn");
+  seenBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const btnParent = btn.closest(".movie");
+      const idMovie = btnParent.getAttribute("data-id");
+      saveToLocalStorage(idMovie);
+      btnParent.classList.toggle("seen");
+      btnParent.classList.contains("seen")
+        ? (btn.textContent = "Déjà vue")
+        : (btn.textContent = "A voir");
+
+      console.log(idMovie);
+    });
+  });
 }
-callApi();
+const movieList = document.querySelector(".container-movies");
+const scrollToTop = document.querySelector(".arrowUp");
 
 function createCard(data) {
+  let localStorageArray = JSON.parse(localStorage.getItem("movie"));
+  if (!localStorageArray) localStorageArray = [];
+  console.log(localStorageArray);
   data.forEach((movie) => {
     const card = document.createElement("div");
     card.classList.add("movie");
     card.setAttribute("data-id", movie.id);
+    if (localStorageArray.includes(movie.id)) {
+      card.classList.add("seen");
+    }
 
     const AlreadySeen = document.createElement("div");
     const AlreadySeenBtn = document.createElement("button");
     AlreadySeen.classList.add("alreadySeen-container");
     AlreadySeenBtn.classList.add("alreadySeen-btn");
-    AlreadySeenBtn.textContent = "Déjà vue";
+    AlreadySeenBtn.textContent = localStorageArray.includes(movie.id)
+      ? "Déja vue"
+      : "A voir";
 
     const containerTitle = document.createElement("div");
     containerTitle.classList.add("container-title");
@@ -40,7 +63,6 @@ function createCard(data) {
     movieList.appendChild(card);
   });
 }
-
 scrollToTop.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
@@ -48,9 +70,18 @@ scrollToTop.addEventListener("click", () => {
   });
 });
 
-/* const observer = new IntersectionObserver(showArrow, {
-  rootMargin: "50%",
-});
-observer.observe(document.querySelector(".container-movies :nth-child(5)"));
-function showArrow() {}
- */
+function saveToLocalStorage(id) {
+  let IdArrays;
+  if (!localStorage.getItem("movie")) {
+    IdArrays = [];
+  } else {
+    IdArrays = JSON.parse(localStorage.getItem("movie"));
+  }
+  if (IdArrays.includes(id)) {
+    const newIdArray = IdArrays.filter((el) => el != id);
+    localStorage.setItem("movie", JSON.stringify(newIdArray));
+  } else {
+    IdArrays.push(id);
+    localStorage.setItem("movie", JSON.stringify(IdArrays));
+  }
+}

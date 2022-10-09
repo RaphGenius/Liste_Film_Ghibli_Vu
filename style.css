@@ -45,6 +45,9 @@ h1 span {
   border-radius: 20px;
   overflow: hidden;
 }
+.seen {
+  opacity: 0.3;
+}
 .movie:hover {
   transform: scale(1.1);
 }
