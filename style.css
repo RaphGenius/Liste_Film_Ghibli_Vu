@@ -30,7 +30,7 @@ h1 span {
   margin-bottom: 20px;
 }
 .container-movies {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px 50px;
   display: flex;
@@ -49,6 +49,7 @@ h1 span {
   transition: transform 200ms ease;
   border-radius: 20px;
   overflow: hidden;
+  cursor: pointer;
 }
 .seen {
   opacity: 0.3;

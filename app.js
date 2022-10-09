@@ -19,8 +19,6 @@ async function callApi() {
       btnParent.classList.contains("seen")
         ? (btn.textContent = "Déjà vue")
         : (btn.textContent = "A voir");
-
-      console.log(idMovie);
     });
   });
 }
@@ -93,8 +91,8 @@ function saveToLocalStorage(id) {
 function numberMoviesSeen() {
   let howManyInLs = JSON.parse(localStorage.getItem("movie"));
   if (!howManyInLs) {
-    howManySeen.textContent = `Film(s) vu(s) : 0`;
+    howManySeen.textContent = `Film(s) vu(s) : 0 /22`;
   } else {
-    howManySeen.textContent = `Film(s) vu(s) : ${howManyInLs.length}`;
+    howManySeen.textContent = `Film(s) vu(s) : ${howManyInLs.length} /22`;
   }
 }
